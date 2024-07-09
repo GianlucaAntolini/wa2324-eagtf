@@ -1,0 +1,25 @@
+\subsection{REST API Summary}
+
+The following is a summary of the REST API used in the webapp.\\Only the "Like" resource has been implemented with REST, while the others are being currently developed.This also holds for REST Error Codes.\\More details are presented later.
+
+\begin{longtable}{|p{.375\columnwidth}|p{.1\columnwidth} |p{.35\columnwidth}|p{.1\columnwidth}|} 
+\hline
+\textbf{URI} & \textbf{Method} & \textbf{Description} & \textbf{Filter} \\\hline
+rest/like/\{recipe\_id\} & POST & Inserts the like to recipe with id "recipe\_id" by user with id "user\_id" found in the HTTP Session & \\\hline
+rest/like/\{recipe\_id\} & DELETE & Removes the like to recipe with id "recipe\_id" by user with id "user\_id" found in the HTTP Session  & \\\hline
+rest/like/\{recipe\_id\} & GET & Retrieves wether recipe with id "recipe\_id" has been liked by user with id "user\_id" found in the HTTP Session & \\\hline
+rest/user & GET & Retrieves the user with id "user\_id" found in the HTTP Session & \\\hline
+rest/user & PUT & Updates the data of the user with id "user\_id" found in the HTTP Session. Used by the user when he is changing its information or by the admin when he is banning a user & \\\hline
+rest/user/login & GET & Login of a user, email and password are found in the body & \\\hline
+rest/recipe/\{recipe\_id\} & POST & Inserts a new recipe with id "recipe\_id" and the rest of the data is found in the JSON in the body & \\\hline
+rest/recipe/\{recipe\_id\} & DELETE & Deletes the recipe with id "recipe\_id" & \\\hline
+rest/recipe/\{recipe\_id\} & PUT & Updates the recipe with id "recipe\_id". Used to update the status of the recipe by an admin & \\\hline
+rest/recipe/\{recipe\_id\} & GET & Returns the recipe with id "recipe\_id" & \\\hline
+rest/recipe/search\_recipe & GET & Returns the result of the search of recipes. Ingredients and tags for the research are found in the body of the request & \\\hline
+rest/recipe/ranked\_recipe & GET & Returns the list of most liked recipes & \\\hline
+rest/recipe/suggested\_recipe & GET & Returns the list of suggested recipes based on the searched recipes & \\\hline
+
+\caption{REST API Summary}
+
+\label{tab:termGlossary}
+\end{longtable}

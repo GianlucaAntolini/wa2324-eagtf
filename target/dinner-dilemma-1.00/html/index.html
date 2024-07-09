@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+<c:import url="/html/include/header.html" />
+
+<body class="bg-[#f2ede5] flex flex-col h-screen">
+
+    <div class="flex-grow overflow-auto pt-24 px-6">
+        <h1>Search recipe: </h1>
+        <form method="get">
+
+            <input type="text" placeholder="queryLenght" value="15" id="quelen" name="quelen" size="20">
+            <br />
+            <input type="text" placeholder="Ingredients" value="${usr_src_ing}" id="usr_src_ing" name="usr_src_ing"
+                size="40">
+            <select
+                onchange="document.getElementById('usr_src_ing').value += this.options[this.selectedIndex].getAttribute('data-id') + ', '">
+                <c:forEach items="${ingredients}" var="item">
+                    <option data-id="${item.getId()}">${item.getName()}</option>
+                </c:forEach>
+            </select>
+            <br />
+            <input type="text" placeholder="Tags" value="${usr_src_tag}" id="usr_src_tag" name="usr_src_tag" size="40">
+            <select
+                onchange="document.getElementById('usr_src_tag').value += this.options[this.selectedIndex].getAttribute('data-id') + ', '">
+                <c:forEach items="${tags}" var="item">
+                    <option data-id="${item.getId()}">${item.getName()}</option>
+                </c:forEach>
+            </select>
+
+            <input type="submit" value="Search">
+            <hr />
+        </form>
+
+        <br>
+        <form action="search_random_recipe" method="get">
+            <input type="submit" value="Random Recepie">
+        </form>
+
+    </div>
+
+    <div id="RankedRecipes"></div>
+
+    <script src="http://localhost:8080/dinner-dilemma-1.00/js/homer.js"></script>
+
+</body>
+
+</html>

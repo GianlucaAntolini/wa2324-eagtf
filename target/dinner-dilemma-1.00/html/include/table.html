@@ -1,0 +1,53 @@
+<!-- Card start -->
+<!-- Individual card container with fixed width, hover effects, and other styling -->
+<div
+  class="card duration-300 flex h-44 w-5/12 justify-start overflow-hidden p-0 rounded-3xl text-left transform transition-transform bg-white hover:scale-105 shadow-lg hover:shadow-xl mx-2 my-2"
+>
+  <!-- Adjusted dimensions and layout -->
+
+  <!-- Link wrapping the card image -->
+  <a href="#" class="h-full w-1/4 card-link">
+    <!-- Adjusted width for image -->
+    <!-- Card image with fallback on error -->
+    <img
+      src=""
+      alt=""
+      onerror="this.onerror=null;this.src='media/logo/logo-full.png';"
+      class="h-full object-cover rounded-l-3xl w-full card-image"
+    />
+    <!-- Adjusted class for image -->
+  </a>
+
+  <!-- Content container -->
+  <div class="flex flex-col justify-between w-3/4 h-full p-4">
+    <!-- Adjusted width for content -->
+
+    <!-- Link wrapping the card title -->
+    <a href="#" class="w-full card-title-link">
+      <!-- Card title -->
+      <h3 class="font-semibold text-xl card-title"></h3>
+    </a>
+
+    <!-- Container for likes and time info -->
+    <div class="flex justify-between w-full mt-2">
+      <!--Difficulty container-->
+      <div
+        class="bg-orange-100 px-4 py-1 rounded-3xl card-difficulty-container"
+      >
+        <p
+          class="font-mono font-semibold text-gray-500 text-orange-800 text-sm card-difficulty"
+        ></p>
+      </div>
+      <!-- Time container -->
+      <div class="bg-gray-100 px-4 py-1 rounded-3xl card-time-container">
+        <p class="font-semibold text-gray-800 text-sm card-time"></p>
+      </div>
+    </div>
+
+    <!-- Card description -->
+    <p
+      class="text-gray-600 mt-2 card-description text-ellipsis overflow-hidden"
+    ></p>
+    <!-- Added description element -->
+  </div>
+</div>

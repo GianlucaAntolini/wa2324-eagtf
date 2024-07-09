@@ -1,0 +1,22 @@
+Author:Emilio Risi 
+
+The file start.sh allows you to have some additional functionality if you are under linux or mac os such as:
+
+Hot positioning : 
+you can do cd $db ($ is always there) to be directly inside the db folder
+the positions for now are:
+
+hp=$PWD (cuurent folder)
+sweb="$PWD/src/main/webapp/"
+j="$PWD/src/main/java/"
+jweb="$PWD/src/main/java/it/unipd/dei/webapp/"
+db="$PWD/src/main/database/"
+
+
+fast update of the maven installation:
+alias updt='mvn cargo:undeploy; mvn clean package cargo:deploy'
+
+auto start of the services under linux
+
+TO START THE ENVIROMENT 
+source ./start.sh

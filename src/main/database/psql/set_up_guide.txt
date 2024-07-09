@@ -1,0 +1,11 @@
+The file setupDb.sh(for Linux and MacOS, setupDb.bat for Windows) is a shell script that will create the 
+database and tables for the application. 
+It will also populate the tables with some sample data. 
+
+Similarly, the file removeDb deletes the database and tables.
+ 
+
+
+
+
+

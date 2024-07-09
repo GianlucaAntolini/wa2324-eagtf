@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ 
+ Copyright 2018 University of Padua, Italy
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+     http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ 
+ Author: 
+ Version: 1.0
+ Since: 1.0
+-->
+<web-app id="dinner-dilemma" version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
+
+	<welcome-file-list>
+		<welcome-file>home</welcome-file>
+	</welcome-file-list>
+
+	<display-name>Dinner Dilemma</display-name>
+	<description>Dinner Dilemma site</description>
+
+
+	<!-- Home Servlet -->
+	<servlet>
+		<servlet-name>Home</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.HomeServlet</servlet-class>
+	</servlet>
+
+	<!-- Mapping between servlets and URIs -->
+	<servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/home</url-pattern>
+  </servlet-mapping>
+
+
+
+	<!-- Home Servlet Rest implemented-->
+	<servlet>
+		<servlet-name>HomeR</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.HomeRestServlet</servlet-class>
+	</servlet>
+
+	<!-- Mapping between servlets and URIs -->
+	<servlet-mapping>
+		<servlet-name>HomeR</servlet-name>
+		<url-pattern>/homer</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Login Servlet -->
+	<servlet>
+		<servlet-name>LoginUserServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.LoginUserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginUserServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<!-- Logout Servlet -->
+	<servlet>
+		<servlet-name>LogoutUserServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.LogoutUserServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>LogoutUserServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+
+	<!-- User Verification Servlet -->
+	<servlet>
+		<servlet-name>UserVerificationServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.UserVerificationServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UserVerificationServlet</servlet-name>
+		<url-pattern>/verification</url-pattern>
+	</servlet-mapping>
+
+	<!-- Change Password Servlet -->
+	<servlet>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.ChangePasswordServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ChangePasswordServlet</servlet-name>
+		<url-pattern>/changePsw</url-pattern>
+	</servlet-mapping>
+
+	<!-- About Us Servlet -->
+	<servlet>
+		<servlet-name>AboutUsServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.AboutUsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AboutUsServlet</servlet-name>
+		<url-pattern>/aboutUs</url-pattern>
+	</servlet-mapping>
+
+	<!-- Recipe Details Servlet -->
+	<servlet>
+		<servlet-name>RecipeDetailsServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.RecipeDetailsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RecipeDetailsServlet</servlet-name>
+		<url-pattern>/recipeDetails</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Register User Servlet -->
+	<servlet>
+		<servlet-name>RegisterUserServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.RegisterUserServlet</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>RegisterUserServlet</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- User Control Servlet -->
+	<servlet>
+		<servlet-name>UserControlServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.UserControlServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UserControlServlet</servlet-name>
+		<url-pattern>/usr_control</url-pattern>
+	</servlet-mapping>
+
+	<!-- Create Recipe Servlet -->
+	<servlet>
+		<servlet-name>CreateRecipeServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.CreateRecipeServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateRecipeServlet</servlet-name>
+		<url-pattern>/create_recipe</url-pattern>
+	</servlet-mapping>
+
+	<!-- View Logged User Data Servlet -->
+	<servlet>
+		<servlet-name>ViewLoggedUserDataServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.ViewLoggedUserDataServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ViewLoggedUserDataServlet</servlet-name>
+		<url-pattern>/usr-data</url-pattern>
+	</servlet-mapping>
+
+	<!-- Update Logged User Data Servlet -->
+	<servlet>
+		<servlet-name>UpdateLoggedUserDataServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.UpdateLoggedUserDataServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UpdateLoggedUserDataServlet</servlet-name>
+		<url-pattern>/upd-usr-data</url-pattern>
+	</servlet-mapping>
+
+	<!-- Search User By Email Servlet -->
+	<servlet>
+		<servlet-name>SearchUserByEmailServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.SearchUserByEmailServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SearchUserByEmailServlet</servlet-name>
+		<url-pattern>/search-user</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Search Created Recipes Servlet -->
+	<servlet>
+		<servlet-name>SearchCreatedRecipesServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.SearchCreatedRecipesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SearchCreatedRecipesServlet</servlet-name>
+		<url-pattern>/search_created_recipes</url-pattern>
+	</servlet-mapping>
+
+	<!-- Recipe Approval Servlet -->
+	<servlet>
+		<servlet-name>RecipeApprovalServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.RecipeApprovalServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RecipeApprovalServlet</servlet-name>
+		<url-pattern>/recipe-approval</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Recipe Recovery Or Removal Servlet -->
+	<servlet>
+		<servlet-name>RecipeRecoveryOrRemovalServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.RecipeRecoveryOrRemovalServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RecipeRecoveryOrRemovalServlet</servlet-name>
+		<url-pattern>/recipe-recovery-or-removal</url-pattern>
+	</servlet-mapping>
+
+	<!-- Search Liked Recipes Servlet -->
+	<servlet>
+		<servlet-name>SearchLikedRecipesServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.SearchLikedRecipesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SearchLikedRecipesServlet</servlet-name>
+		<url-pattern>/search_liked_recipes</url-pattern>
+	</servlet-mapping>
+
+	<!-- Search Random Recipe Servlet -->
+	<servlet>
+		<servlet-name>SearchRandomRecipeServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.SearchRandomRecipeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SearchRandomRecipeServlet</servlet-name>
+		<url-pattern>/search_random_recipe</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Search Recipes Servlet -->
+	<servlet>
+		<servlet-name>SearchRecipesServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.SearchRecipesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SearchRecipesServlet</servlet-name>
+		<url-pattern>/search_recipes</url-pattern>
+	</servlet-mapping>
+
+
+	<!--  Search Suggestion Servlet -->
+	<servlet>
+		<servlet-name>SuggestedRecipesServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.SuggestedRecipesServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SuggestedRecipesServlet</servlet-name>
+		<url-pattern>/search_suggestions</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Ranked Recepies Search Servlet  -->
+
+	<servlet>
+		<servlet-name>RankedRecepiesServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.RankedRecepiesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RankedRecepiesServlet</servlet-name>
+		<url-pattern>/ranked_recipes</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Rest Dispatcher Servlet  -->
+	<servlet>
+		<servlet-name>RestDispatcherServlet</servlet-name>
+		<servlet-class>it.unipd.dei.webapp.servlet.RestDispatcherServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RestDispatcherServlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- Resource for the database -->
+	<resource-ref>
+		<description>Connection pool to the database</description>
+		<res-ref-name>jdbc/employee-ferro</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<error-page>
+ 		<error-code>404</error-code>
+ 		<location>/html/kirby.html</location>
+	</error-page>
+
+</web-app>

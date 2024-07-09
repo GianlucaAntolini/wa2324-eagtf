@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.unipd.dei.webapp.dao"},{"l":"it.unipd.dei.webapp.mail"},{"l":"it.unipd.dei.webapp.resource"},{"l":"it.unipd.dei.webapp.rest"},{"l":"it.unipd.dei.webapp.servlet"},{"l":"it.unipd.dei.webapp.utils"}];updateSearchResults();

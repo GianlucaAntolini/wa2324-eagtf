@@ -1,0 +1,223 @@
+@import "home.css";
+@import "searchAnimation.css";
+@import "alertAnimation.css";
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  min-height: 93vh;
+}
+
+.logo-fixed {
+  position: fixed;
+  top: 3%;
+  left: 30px;
+  width: 4rem;
+}
+
+.footer {
+  height: 7vh;
+}
+
+.red-alerts {
+  position: absolute;
+  margin-top: 10%;
+  left: 10%;
+  z-index: 10;
+  width: 80%;
+  text-align: center;
+  align-items: center;
+}
+
+.red-alert {
+  width: 100%;
+  text-align: center;
+}
+
+.green-alerts {
+  position: absolute;
+  margin-top: 10%;
+  left: 10%;
+  z-index: 10;
+  width: 80%;
+  text-align: center;
+  align-items: center;
+}
+
+.green-alert {
+  width: 100%;
+  text-align: center;
+}
+
+
+
+/* For background of header/footer */
+.bg-1 {
+  background-color: #8B4513;
+}
+
+/* For background of body */
+.bg-2 {
+  background-color: #f7f3e4;
+}
+
+/* For background of cards/tables */
+.bg-3 {
+  background-color: #edd899;
+  ;
+}
+
+/* For buttons */
+.bg-4 {
+  background-color: #2a1b1b;
+}
+
+/* For other colors (ex: tags/ingredients bg) */
+.bg-5 {
+  background-color: #0D0D0D;
+}
+
+/* For color of text that is not white or black */
+.fg-1 {
+  color: #F24968;
+}
+
+/* For color of text that is not white or black */
+.fg-2 {
+  color: #8AD966;
+}
+
+.difficulty-box {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  display: inline-block;
+  text-align: center;
+}
+
+.hard {
+  background-color: #ffcccc;
+  /* Light red */
+  color: #b30000;
+  /* Dark red */
+  font-weight: bold;
+}
+
+.medium {
+  background-color: #ffe5b4;
+  /* Light orange */
+  color: #cc8400;
+  /* Dark orange */
+  font-weight: bold;
+}
+
+.easy {
+  background-color: #ccffcc;
+  /* Light green */
+  color: #267326;
+  /* Dark green */
+  font-weight: bold;
+}
+
+.disabled {
+  background-color: #e0e0e0;
+  /* Light gray */
+  color: #a0a0a0;
+  /* Darker gray */
+}
+
+.log-banner {
+  z-index: 3;
+}
+
+.truncate-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.scrollable-ing-tag {
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.scrollable-ing-tag ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.context-menu {
+  border-radius: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  position: absolute;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  z-index: 10;
+}
+
+.context-menu ul {
+  padding: 0px;
+  margin: 0px;
+  min-width: 150px;
+  list-style: none;
+}
+
+.context-menu ul li {
+  padding-bottom: 7px;
+  padding-top: 7px;
+}
+
+.context-menu ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.context-menu ul li:hover {
+  background: lightgray;
+}
+
+.cmButton1 {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.cmButton2 {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.chevron-hover {
+  position: relative;
+  transition: color 0.3s;
+}
+
+.chevron-hover::after {
+  content: '>';
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: opacity 0.3s, right 0.3s;
+}
+
+.chevron-hover:hover::after {
+  opacity: 1;
+  right: 10px;
+}
+
+#likeButton {
+  cursor: pointer;
+  font-size: 35px;
+}

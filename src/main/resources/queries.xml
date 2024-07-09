@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<queries>
+  <query name="testQuery">
+    <statement>
+      SELECT DISTINCT r.id, r.name, COUNT(r.id) as count
+      FROM "Recipe" r
+      GROUP BY r.id
+      LIMIT 10;
+      ;
+    </statement>
+  </query>
+
+  <query name="GetSuggestionForSearchDinQuery">
+    <statement>
+      SELECT DISTINCT
+      sq.rid AS id,
+      sq.rn AS name,
+      sq.n AS ing_distance,
+      r.image_url AS image_url,
+      r.time_minutes AS time_minutes,
+      r.difficulty AS difficulty
+      FROM (
+      SELECT DISTINCT r.rid, r.rn, COUNT(ri.ingredient_id) AS n
+
+      FROM (
+      SELECT DISTINCT r.id AS rid, r.name AS rn, COUNT(ri.ingredient_id)
+      FROM "Recipe" r
+      JOIN "Recipe_Ingredient" ri ON r.id = ri.recipe_id
+      -- dinamic ceil(n/2)
+
+      GROUP BY rid, rn HAVING COUNT(ri.ingredient_id) >= ?
+      ) r
+      LEFT JOIN "Recipe_Ingredient" ri ON r.rid = ri.recipe_id
+
+      -- ingredient dinamic code
+
+      ???
+
+      GROUP BY r.rid, r.rn
+      ) sq
+      JOIN "Recipe" r ON sq.rid = r.id
+
+      -- tag dinamic code
+
+      ???
+
+      ORDER BY sq.n
+      LIMIT ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetSuggestionForSearchDinQueryIngCode">
+    <statement>
+      WHERE (
+      -- ingredients
+      ri.ingredient_id NOT IN (??)
+      )
+    </statement>
+  </query>
+
+  <query name="GetSuggestionForSearchDinQueryTagCode">
+    <statement>
+      JOIN "Recipe_Tag" rt ON sq.rid = rt.recipe_id
+
+      WHERE (
+      -- tags
+      rt.tag_id IN (??)
+      )
+    </statement>
+  </query>
+
+  <query name="GetSuggestionForSearchQuery">
+    <statement>
+      SELECT DISTINCT
+      sq.rid AS id,
+      sq.rn AS name,
+      sq.n AS ing_distance,
+      r.image_url AS image_url,
+      r.time_minutes AS time_minutes,
+      r.difficulty AS difficulty
+      FROM (
+      SELECT DISTINCT r.rid, r.rn, COUNT(ri.ingredient_id) AS n
+
+      FROM (
+      SELECT DISTINCT r.id AS rid, r.name AS rn, COUNT(ri.ingredient_id)
+      FROM "Recipe" r
+      JOIN "Recipe_Ingredient" ri ON r.id = ri.recipe_id
+
+      -- needs to be ceil(n/2)
+
+      GROUP BY rid, rn HAVING COUNT(ri.ingredient_id) >= 0
+      ) r
+      LEFT JOIN "Recipe_Ingredient" ri ON r.rid = ri.recipe_id
+
+      -- ingredients
+      WHERE (
+      ri.ingredient_id NOT IN ( 1530, 2560, 2720, 3106, 3616, 3638, 3974, 4877, 5195, 5539, 5547,
+      5661)
+      )
+
+      GROUP BY r.rid, r.rn
+      ) sq
+      JOIN "Recipe_Tag" rt ON sq.rid = rt.recipe_id
+      JOIN "Recipe" r ON sq.rid = r.id
+
+      -- tags
+      WHERE (
+      -- tags
+      rt.tag_id IN ( 88, 187 )
+      )
+
+      ORDER BY sq.n
+      LIMIT 10
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRankedRecipesQuery">
+    <statement>
+      SELECT r.id, r.name, r.description, r.time_minutes , r.difficulty, r.image_url
+      ,r.creation_date , r.user_id,r.approved, COUNT(ulr.recipe_id) AS like_count
+      FROM "Recipe" r
+      LEFT JOIN "User_Liked_Recipe" ulr ON r.id = ulr.recipe_id
+      GROUP BY r.id, r.name, r.description, r.time_minutes, r.difficulty, r.image_url
+      ORDER BY like_count DESC
+      LIMIT ?
+      ;
+    </statement>
+  </query>
+
+  <!-- r.id, r.name, r.description, r.time_minutes , r.difficulty, r.image_url , r.creation_date ,
+  r.user_id   , r.approved, -->
+  <query name="GetRecipesFromIngTagDinQuery">
+    <statement>
+      -- GetRecipesFromIngTagDinQuery"
+      SELECT DISTINCT r.id, r.name, r.description, r.time_minutes , r.difficulty, r.image_url
+      ,r.creation_date , r.user_id,r.approved, COUNT(ri.recipe_id) as n_ing
+      FROM "Recipe" r
+      LEFT JOIN "Recipe_Tag" rt ON r.id = rt.recipe_id
+      LEFT JOIN "Tag" ta ON rt.tag_id = ta.id
+      LEFT JOIN "Recipe_Ingredient" ri ON r.id = ri.recipe_id
+
+      WHERE r.approved AND r.id NOT IN (
+      -- list of recipes that also uses other ingredients
+      SELECT DISTINCT r.id
+      FROM "Recipe" r
+      JOIN "Recipe_Ingredient" ri ON r.id = ri.recipe_id
+      JOIN "Ingredient" i ON ri.ingredient_id = i.id
+
+      WHERE
+
+      TRUE
+
+      ???
+
+      )
+
+      ???
+
+      GROUP BY r.id, r.name
+      ORDER BY 1
+      LIMIT ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRecipesFromIngTagDinQueryListCode">
+    <statement>?,</statement>
+  </query>
+
+  <query name="GetRecipesFromIngTagDinQueryIngCode">
+    <statement>
+      AND
+      (
+      -- ingredients
+      i.id NOT IN (??)
+      )
+    </statement>
+  </query>
+
+  <query name="GetRecipesFromIngTagDinQueryTagCode">
+    <statement>
+      AND
+      (
+      -- tags
+      ta.id IN (??)
+      )
+    </statement>
+  </query>
+
+  <query name="GetRecipeByIdQuery">
+    <statement>
+      SELECT r.id as r_id, r.name as r_name, r.description as r_descr, r.time_minutes as r_time,
+      r.difficulty as r_diff,
+      r.image_url as r_img, r.creation_date as r_date, i.id as i_id, i.name as i_name, u.id as u_id,
+      ta.id as t_id,
+      ta.name as t_name, u.name as u_name, u.surname as u_surname, COUNT(ulr.user_id) as likes
+      FROM "Recipe" as r
+      LEFT JOIN "Recipe_Ingredient" as ri ON r.id = ri.recipe_id
+      LEFT JOIN "Ingredient" as i ON ri.ingredient_id = i.id
+      LEFT JOIN "Recipe_Tag" as rt ON r.id = rt.recipe_id
+      LEFT JOIN "Tag" as ta ON rt.tag_id = ta.id
+      LEFT JOIN "User" as u ON r.user_id = u.id
+      LEFT JOIN "User_Liked_Recipe" as ulr ON ulr.recipe_id = r.id
+      WHERE ri.recipe_id = ?
+      GROUP BY r_id, r_name, r_descr, r_time, r_diff, r_img, i_id, i_name, t_id, t_name, u_id,
+      u_name, u_surname;
+    </statement>
+  </query>
+
+  <query name="BanUserByIdQuery">
+    <statement>
+      UPDATE "User" SET role_id = ? WHERE id = ? RETURNING role_id;
+    </statement>
+  </query>
+
+  <query name="GetAllTagsQuery">
+    <statement>
+      SELECT * FROM "Tag"
+      ;
+    </statement>
+  </query>
+
+  <query name="GetAllIngredientsQuery">
+    <statement>
+      SELECT ing.id, ing.name, count(ri.recipe_id) FROM "Ingredient" ing
+      JOIN "Recipe_Ingredient" ri ON ing.id = ri.ingredient_id
+      LEFT JOIN "Recipe" r ON ri.recipe_id = r.id
+      WHERE r.approved
+      GROUP BY ing.id, ing.name HAVING count(ri.recipe_id)>0
+      order by count(ri.recipe_id) desc
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRandomRecipeQuery1">
+    <statement>
+      SELECT * FROM "Recipe" WHERE approved = true ORDER BY RANDOM() LIMIT 1
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRandomRecipeQuery2">
+    <statement>
+      SELECT * FROM "Recipe_Ingredient" as ri JOIN "Ingredient" as i ON ri.ingredient_id = i.id
+      WHERE ri.recipe_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRecipeLikesQuery">
+    <statement>
+      SELECT COUNT(ulr.user_id) as likes
+      FROM "Recipe" as r LEFT JOIN "User_Liked_Recipe" as ulr ON ulr.recipe_id = r.id
+      WHERE ri.recipe_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRecipesToBeApprovedQuery1">
+    <statement>
+      SELECT * FROM "Recipe" where approved is null
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRecipesToBeApprovedQuery2">
+    <statement>
+      SELECT * FROM "Recipe_Ingredient" as ri JOIN "Ingredient" as i ON ri.ingredient_id = i.id
+      WHERE ri.recipe_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRecipesToBeRecoveredOrRemovedQuery1">
+    <statement>
+      SELECT * FROM "Recipe" where approved = false
+      ;
+    </statement>
+  </query>
+
+  <query name="GetRecipesToBeRecoveredOrRemovedQuery2">
+    <statement>
+      SELECT * FROM "Recipe_Ingredient" as ri JOIN "Ingredient" as i ON ri.ingredient_id = i.id
+      WHERE ri.recipe_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetUserLikedRecipesByUserIdQuery1">
+    <statement>
+      SELECT * FROM "Recipe" WHERE id IN (SELECT recipe_id FROM "User_Liked_Recipe" WHERE approved =
+      true AND user_id = ?)
+      ;
+    </statement>
+  </query>
+
+  <query name="GetUserLikedRecipesByUserIdQuery2">
+    <statement>
+      SELECT * FROM "Recipe_Ingredient" as ri JOIN "Ingredient" as i ON ri.ingredient_id = i.id
+      WHERE ri.recipe_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetUserLikedRecipesByUserIdQuery3">
+    <statement>
+      SELECT * FROM "Recipe_Tag" as rt JOIN "Tag" as t ON rt.tag_id = t.id
+      WHERE rt.recipe_id = ?
+    </statement>
+  </query>
+
+  <query name="GetUserLikeRecipeQuery">
+    <statement>
+      SELECT * FROM "User_Liked_Recipe" as ulr WHERE ulr.recipe_id = ? AND ulr.user_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetUserRecipesByUserIdQuery1">
+    <statement>
+      SELECT * FROM "Recipe" where user_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="GetUserRecipesByUserIdQuery2">
+    <statement>
+      SELECT * FROM "Recipe_Ingredient" as ri JOIN "Ingredient" as i ON ri.ingredient_id = i.id
+      WHERE ri.recipe_id = ?
+      ;
+    </statement>
+  </query>
+  <query name="GetUserRecipesByUserIdQuery3">
+    <statement>
+      SELECT * FROM "Recipe_Tag" as rt JOIN "Tag" as t ON rt.tag_id = t.id
+      WHERE rt.recipe_id = ?
+    </statement>
+  </query>
+  <query name="InsertIngredientQuery1">
+    <statement>
+      INSERT INTO "Ingredient" (name) VALUES (?) RETURNING id;
+      ;
+    </statement>
+  </query>
+
+  <query name="InsertIngredientQuery2">
+    <statement>
+      SELECT id FROM "Ingredient" WHERE name = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="InsertLikeRecipeByUserAndRecipeIdQuery">
+    <statement>
+      INSERT INTO "User_Liked_Recipe" (user_id, recipe_id) VALUES (?, ?)
+      ;
+    </statement>
+  </query>
+
+  <query name="InsertRecipeQuery1">
+    <statement>
+      INSERT INTO "Recipe" (name, description, time_minutes, difficulty, image_url, creation_date,
+      user_id, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;
+      ;
+    </statement>
+  </query>
+
+  <query name="InsertRecipeQuery2">
+    <statement>
+      INSERT INTO "Recipe_Ingredient" (recipe_id, ingredient_id) VALUES (?, ?)
+      ;
+    </statement>
+  </query>
+
+  <query name="InsertRecipeQuery3">
+    <statement>
+      INSERT INTO "Recipe_Tag" (recipe_id, tag_id) VALUES (?, ?)
+      ;
+    </statement>
+  </query>
+
+  <query name="LoginUserQuery">
+    <statement>
+      SELECT * FROM "User" WHERE email = ? AND password = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="RecoverRecipeByIdQuery">
+    <statement>
+      UPDATE "Recipe" SET approved = null WHERE id = ? RETURNING approved
+      ;
+    </statement>
+  </query>
+
+  <query name="RegisterUserQuery">
+    <statement>
+      INSERT INTO "User" (email, password, name, surname, role_id, registration_date) VALUES (?, ?,
+      ?, ?, ?, ?)
+      ;
+    </statement>
+  </query>
+
+  <query name="RemoveLikeRecipeByUserAndRecipeIdQuery">
+    <statement>
+      DELETE FROM "User_Liked_Recipe" WHERE user_id = ? AND recipe_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="RemoveRecipeByIdQuery1">
+    <statement>
+      DELETE FROM "Recipe_Ingredient" WHERE recipe_id = ? RETURNING recipe_id
+      ;
+    </statement>
+  </query>
+
+  <query name="RemoveRecipeByIdQuery2">
+    <statement>
+      DELETE FROM "Recipe_Tag" WHERE recipe_id = ? RETURNING recipe_id
+      ;
+    </statement>
+  </query>
+
+  <query name="RemoveRecipeByIdQuery3">
+    <statement>
+      DELETE FROM "Recipe" WHERE id = ? RETURNING id
+      ;
+    </statement>
+  </query>
+
+  <query name="SearchUserByEmailQuery">
+    <statement>
+      SELECT * FROM "User" WHERE email LIKE ?
+      ;
+    </statement>
+  </query>
+
+  <query name="SetApprovedRecipeByIdQuery">
+    <statement>
+      UPDATE "Recipe" SET approved = ? WHERE id = ? RETURNING approved
+      ;
+    </statement>
+  </query>
+
+  <query name="ToggleUserLikeRecipeQuery1">
+    <statement>
+      SELECT * FROM "User_Liked_Recipe" as ulr WHERE ulr.recipe_id = ? AND ulr.user_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="ToggleUserLikeRecipeQuery2">
+    <statement>
+      DELETE FROM "User_Liked_Recipe" WHERE recipe_id = ? AND user_id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="ToggleUserLikeRecipeQuery3">
+    <statement>
+      INSERT INTO "User_Liked_Recipe" (recipe_id, user_id) VALUES (?, ?)
+      ;
+    </statement>
+  </query>
+
+  <query name="UpdateLoggedUserDataQuery">
+    <statement>
+      UPDATE "User" SET name = ?, surname = ? WHERE id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="ViewLoggedUserDataQuery">
+    <statement>
+      SELECT * FROM "User" WHERE id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="UpdateUserPswQuery1">
+    <statement>
+      UPDATE "User" SET password = ? WHERE id = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="UpdateUserPswQuery2">
+    <statement>
+      UPDATE "User" SET password = ? WHERE email = ?
+      ;
+    </statement>
+  </query>
+
+  <query name="UpdateUserPswQuery3">
+    <statement>
+      SELECT email FROM "User" WHERE id = ?
+      ;
+    </statement>
+  </query>
+
+</queries>

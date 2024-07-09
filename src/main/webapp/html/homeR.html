@@ -1,0 +1,52 @@
+<%@ page contentType="text/html;charset=utf-8" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+        <!DOCTYPE html>
+
+        <html>
+        <c:import url="/html/include/header.html" />
+
+        <body>
+            <h1><a href="home">Home</a></h1>
+            <hr />
+            <c:import url="/jsp/include/log-banner.jsp" />
+            <h3>
+                <p> <a href="aboutUs">About Us</a></p>
+            </h3>
+            <hr />
+            <c:import url="/jsp/include/homeErr-banner.jsp" />
+
+            <h1>Search recipe: </h1>
+            <form method="get">
+
+                <input type="text" placeholder="queryLenght" value="15" id="quelen" name="quelen" size="20">
+                <br />
+                <input type="text" placeholder="Ingredients" value="${usr_src_ing}" id="usr_src_ing" name="usr_src_ing"
+                    size="40">
+                <select
+                    onchange="document.getElementById('usr_src_ing').value += this.options[this.selectedIndex].getAttribute('data-id') + ', '">
+                    <c:forEach items="${ingredients}" var="item">
+                        <option data-id="${item.getId()}">${item.getName()}</option>
+                    </c:forEach>
+                </select>
+                <br />
+                <input type="text" placeholder="Tags" value="${usr_src_tag}" id="usr_src_tag" name="usr_src_tag"
+                    size="40">
+                <select
+                    onchange="document.getElementById('usr_src_tag').value += this.options[this.selectedIndex].getAttribute('data-id') + ', '">
+                    <c:forEach items="${tags}" var="item">
+                        <option data-id="${item.getId()}">${item.getName()}</option>
+                    </c:forEach>
+                </select>
+
+                <input type="submit" value="Search">
+                <hr />
+            </form>
+
+            <br>
+            <form action="search_random_recipe" method="get">
+                <input type="submit" value="Random Recepie">
+            </form>
+        </body>
+
+        </html>

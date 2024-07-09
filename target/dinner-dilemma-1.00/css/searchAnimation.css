@@ -1,0 +1,95 @@
+#searchAnimationContainer {
+  padding-top: 3%;
+  padding-bottom: 10%;
+}
+
+#searchAnimationElements {
+  width: 8%;
+  left: 40%;
+  position: relative;
+  animation: FadeIn 2s forwards;
+}
+
+.animationElement {
+  position: absolute;
+  /* animation: FadeIn 2s forwards; */
+}
+
+/* Keyframes for Animation */
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Specific Positions for Animation Elements */
+#taco {
+  top: 0%;
+  left: 0%;
+  animation: slideFadeInTaco 2.5s alternate infinite;
+}
+
+/* Keyframes for Taco Animation */
+@keyframes slideFadeInTaco {
+  0% {
+    transform: rotate(100deg);
+  }
+
+  100% {
+    transform: rotate(120deg);
+  }
+}
+
+/* Animations for Thinghy Elements */
+#thinghy1,
+#thinghy2,
+#thinghy3,
+#thinghy4 {
+  animation: shiftAnim 2s alternate infinite;
+  animation-delay: 0s;
+  /* Default delay, will be overridden */
+}
+
+/* Specific Positions for Thinghy Elements */
+#thinghy1 {
+  top: 0%;
+  left: 0%;
+  animation-delay: 0.5s;
+  /* Start after 1 second */
+}
+
+#thinghy2 {
+  top: 0%;
+  left: 0%;
+  animation-delay: 1s;
+  /* Start after 1.5 seconds */
+}
+
+#thinghy3 {
+  top: 0%;
+  left: 0%;
+  animation-delay: 1.5s;
+  /* Start after 2 seconds */
+}
+
+#thinghy4 {
+  top: 0%;
+  left: 0%;
+  animation-delay: 2s;
+  /* Start after 2.5 seconds */
+}
+
+/* Keyframes for Shift Animation */
+@keyframes shiftAnim {
+  0% {
+    transform: translate(0%, 0%);
+  }
+
+  100% {
+    transform: translate(100%, 0%);
+  }
+}

@@ -1,0 +1,19 @@
+\section{Group Members Contribution}
+
+
+\begin{description}
+	
+	\item[Gianluca Antolini] Worked on the setup of the project, the creation of the database ER schema and the relative translation to SQL code. Created DAOs (also with Abstract DAO pattern) and some Servlets and JSPs. Worked on pages: login, create recipe, liked recipes and created recipes. Worked on report.
+ 	\item[Tommaso Bergamasco] Worked on the "Create Recipe" servlet and wrote the queries responsible for inserting new ingredients into the database.
+	\item[Andrea Felline] Written (and fixed multiple times) the Python script for cleaning and formatting the CSV dataset of recipes. During this process, I ensured that the dataset adhered to PostgreSQL requirements for data formatting. 
+    I developed the largest queries, such as searching for recipes based on ingredients and tags, suggesting recipes to compensate for empty or poor search results, and retrieving recipes along with their ingredients, creator information, and number of likes.
+    I’ve written the About Us JSP page and servlet, as well as the JSP page, servlet, and DAO for displaying recipe details. 
+    I also created the like REST service with the collaboration of Francesco Frigato.
+    I developed the verify-user JSP page and servlet using the mail manager, and implemented the change password functionality, including the respective page, servlet, and DAO. Finally, I updated the login and registration processes to utilize the verification servlet when needed.
+	\item[Francesco Frigato] Worked on the setup of the project and development of the database. Created and managed the admin section of the WA, including the ones for managing recipes approval, removal or recovery, and for managing the users of the WA. And created the servlet for managing the logged user data. Helped fixing minor issues in other servlets, jsps and htmls.
+
+    \item[Emilio Risi] Wrote on the maven configuration  of the project and the scripts for a fast load and reload of the Postgres database. Wrote the Query loader and  format of queries.xml to be used in the daos. Worked on the Login and Register servlets and  Created  the Homepage servlet and the annex servlets to obtain the the recepies searched by the user, the ranked list and the suggested recipes, their daos and the dinamic SQL code (based on the queries of Andrea Felline) and their
+    jsp code. 
+    Working on the recipe part of the rest Api and writing  the dispacher for it . 
+
+\end{description}

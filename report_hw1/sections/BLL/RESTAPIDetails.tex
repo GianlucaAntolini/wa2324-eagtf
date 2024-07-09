@@ -1,0 +1,78 @@
+\subsection{REST API Details}
+
+The following are the details of the REST APIs implemented for the "Like" resource.
+
+\subsubsection*{Like - GET}
+Returns wether a user has liked a recipe or not.
+\begin{itemize}
+    \item URL: \texttt{rest/like/\{recipe\_id\}}
+    \item Method: \texttt{GET}
+    \item URL Parameters:
+    \begin{itemize}
+        \item \texttt{recipe\_id}: the id of the recipe
+    \end{itemize}
+    \item Data Parameters: \texttt{none}
+    \item Success Response:
+    \begin{itemize}
+        \item Code: \texttt{200}
+        \item Content: \texttt{\{"like":"true"\}}
+    \end{itemize}
+    \item Error Response:
+    \begin{itemize}
+        \item Code: \texttt{500}
+        \item Reason: internal server error
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Like - DELETE}
+Removes the like that a user has on a recipe.
+\begin{itemize}
+    \item URL: \texttt{rest/like/\{recipe\_id\}}
+    \item Method: \texttt{DELETE}
+    \item URL Parameters:
+    \begin{itemize}
+        \item \texttt{recipe\_id}: the id of the recipe
+    \end{itemize}
+    \item Data Parameters: \texttt{none}
+    \item Success Response:
+    \begin{itemize}
+        \item Code: \texttt{200}
+    \end{itemize}
+    \item Error Response:
+    \begin{itemize}
+        \item \begin{itemize}
+                \item Code: \texttt{500}
+                \item Reason: internal server error
+                \end{itemize}
+        \item \begin{itemize}
+                \item Code: \texttt{405}
+                \item Reason: like is not present in the database
+                \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Like - POST}
+Inserts the like on a recipe by a user.
+\begin{itemize}
+    \item URL: \texttt{rest/like/\{recipe\_id\}}
+    \item Method: \texttt{DELETE}
+    \item URL Parameters:
+    \begin{itemize}
+        \item \texttt{recipe\_id}: the id of the recipe
+    \end{itemize}
+    \item Data Parameters: \texttt{none}
+    \item Success Response:
+    \begin{itemize}
+        \item Code: \texttt{200}
+    \end{itemize}
+    \item Error Response:
+    \item \begin{itemize}
+                \item Code: \texttt{500}
+                \item Reason: internal server error
+                \end{itemize}
+        \item \begin{itemize}
+                \item Code: \texttt{405}
+                \item Reason: like already present in the database
+                \end{itemize}
+    
+\end{itemize}
